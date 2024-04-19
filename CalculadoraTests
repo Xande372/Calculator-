@@ -1,0 +1,70 @@
+using CalculadoraPrincipal.Services;
+
+namespace CalculadoraTests;
+
+public class CalculadoraTests
+{
+    [Theory]
+    [InlineData (1, 2, 3)]
+    [InlineData (4, 5, 9)]
+    public void TesteDeSomar(int num1, int num2, int resultadoTeste)
+    {
+        CalculadoraImp calc = new CalculadoraImp();
+
+        int resultadoCalculadora = calc.Somar(num1, num2);
+
+        Assert.Equal(resultadoCalculadora, resultadoTeste);
+    }
+
+    [Theory]
+    [InlineData (2, 1, 1)]
+    [InlineData (5, 4, 1)]
+    public void TesteDeSubtrair(int num1, int num2, int resultadoTeste)
+    {
+        CalculadoraImp calc = new CalculadoraImp();
+
+        int resultadoCalculadora = calc.Subtrair(num1, num2);
+
+        Assert.Equal(resultadoCalculadora, resultadoTeste);
+    }
+
+    [Theory]
+    [InlineData (1, 2, 2)]
+    [InlineData (4, 5, 20)]
+    public void TesteDeMultiplicar(int num1, int num2, int resultadoTeste)
+    {
+        CalculadoraImp calc = new CalculadoraImp();
+
+        int resultadoCalculadora = calc.Multiplicar(num1, num2);
+
+        Assert.Equal(resultadoCalculadora, resultadoTeste);
+    }
+
+    [Theory]
+    [InlineData (6, 2, 3)]
+    [InlineData (5, 5, 1)]
+    public void TesteDeDividir(int num1, int num2, int resultadoTeste)
+    {
+        CalculadoraImp calc = new CalculadoraImp();
+
+        int resultadoCalculadora = calc.Dividir(num1, num2);
+
+        Assert.Equal(resultadoCalculadora, resultadoTeste);
+    }
+
+    [Fact]
+    public void TesteDeHistorico()
+    {
+       CalculadoraImp calc = new CalculadoraImp(); 
+
+       calc.Somar(1, 2);
+       calc.Somar(2, 8);
+       calc.Somar(3, 7);
+       calc.Somar(4, 1);
+
+       var lista = calc.Historico();
+
+       Assert.NotEmpty(lista);
+       Assert.Equal(3, lista.Count);
+    }
+}
